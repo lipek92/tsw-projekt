@@ -1,0 +1,61 @@
+.all
+{
+	width: 1000px;
+	text-align: left;
+	margin: 0 auto;
+}
+
+.teamNames
+{
+	color: blue;
+	text-align: center;
+}
+
+.teams
+{
+	font-size: 45px;
+	margin: 20px 0px;
+
+}
+
+.team
+{
+	width: 30%;
+	text-align: center;
+}
+
+
+#firstClub
+{
+	float: left;
+
+}
+
+#secondClub
+{
+	float: right;
+
+}
+
+#score
+{
+	color: red;
+	font-size: 45px;
+
+	text-align: center;
+
+
+	position: relative;
+}
+
+.message
+{
+	width: 100%;
+	font-family: Verdana;
+	font-size: 12px;
+	color: #414141;
+	line-height: 16px;
+	border-top: 1px solid #dbdbdb;
+	padding: 6px 0;
+	float: left;
+}
