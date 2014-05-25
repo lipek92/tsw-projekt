@@ -1,5 +1,6 @@
 {
-    "name": "application-name",
+    "name": "Relacja_live",
+    "author": "Michał Lipowski",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -7,6 +8,11 @@
     },
     "dependencies": {
         "express": "3.x",
-        "ejs": "*"
+        "ejs": "*",
+        "connect": "^2.14.5",
+        "socket.io": "^0.9.16",
+        "passport": "^0.2.0",
+        "passport-local": "^1.0.0",
+        "passport.socketio": "^3.0.1"
     }
 }

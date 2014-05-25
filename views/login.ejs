@@ -6,5 +6,20 @@
   </head>
   <body>
     <h1><%= title %></h1>
+    <form action="/login" method="post">
+		<div>
+			<label>Użytkownik:</label>
+			<input type="text" name="username"/><br/>
+		</div>
+		<div>
+			<label>Hasło:</label>
+			<input type="password" name="password"/>
+		</div>
+		<div>
+			<input type="submit" value="Zaloguj"/>
+		</div>
+	</form>
   </body>
 </html>
+
+
