@@ -3,22 +3,22 @@
   <head>
     <title>Logowanie - Relacja live</title>
     <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/logowanie.css' />
+    <link rel='stylesheet' href='bootstrap/dist/css/bootstrap.min.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <form action="/login" method="post">
+  	<div class="container">
+    <form action="/login" method="post" class="form-signin">
+    	<h2 class="form-signin-heading">Logowanie</h2>
 		<div>
-			<label>Użytkownik:</label>
-			<input type="text" name="username"/><br/>
-		</div>
-		<div>
-			<label>Hasło:</label>
-			<input type="password" name="password"/>
-		</div>
-		<div>
-			<input type="submit" value="Zaloguj"/>
+			<input type="login" class="form-control" name="username" placeholder="Login" required />
+
+			<input type="password" class="form-control" name="password" placeholder="Hasło" required />
+
+			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Zaloguj"/>
 		</div>
 	</form>
+	</div>
   </body>
 </html>
 

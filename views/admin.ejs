@@ -14,9 +14,11 @@
       <div data-ng-repeat="msg in msgs track by $index">{{msg}}</div>
 
     <form action="" data-ng-submit="sendMsg()">
-      <input type="text" data-ng-model="msg.text" maxlength="50">
+      <input type="text" data-ng-model="msg.text">
     </form>
-    
+
+
+
   </div>
 </body>
 </html>

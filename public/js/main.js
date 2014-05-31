@@ -22,7 +22,7 @@ app.controller('relacjaCtrlr', ['$scope', 'socket',
         $scope.connected = false;
         $scope.sendMsg = function () {
             if ($scope.msg && $scope.msg.text) {
-                socket.emit('send msg', safe_tags_replace($scope.msg.text.substring(0, 20)));
+                socket.emit('send msg', safe_tags_replace($scope.msg.text));
                 $scope.msg.text = '';
             }
         };
