@@ -3,6 +3,9 @@
 <head>
 	<title><%= title %></title>
 	<link rel="stylesheet" href="css/style.css">
+	<script src="socket.io/socket.io.js"></script>
+  	<script src="angular/angular.min.js"></script>
+  	<script src="js/main.js"></script>
 </head>
 <body>
 	<div class="all" align="center">
@@ -24,20 +27,13 @@
 				</div>
 			</div>
 
-			<div class="relation">
-				<div class="message">
-					15 min. - Po pięknej akcji pada pierwszy gol dla drużyny gospodarzy, a zdobywcą bramki jest Criastiano Ronaldo!
-				</div>
-				<div class="message">
-					10 min. - Żółta kartka dla Puyola za brutalny faul.
-				</div>
-				<div class="message">
-					1 min. - Sędzia rozpoczyna mecz!
-				</div>
-				<div class="message">
-					<b>Witamy w relacji "akcja po akcji"</b>
-				</div>
+		<div data-ng-app="relacja">
+  			<div data-ng-controller="relacjaCtrlr">
+			    <div class="relation">
+      				<div data-ng-repeat="msg in msgs track by $index" class="message">{{msg}}</div>
+    			</div>
 			</div>
+		</div>
 
 	</div>
 	<div class="login">

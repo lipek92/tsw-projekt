@@ -2,9 +2,21 @@
 <html>
   <head>
     <title>Administracja - Relacja live</title>
+    <script src="socket.io/socket.io.js"></script>
+  	<script src="angular/angular.min.js"></script>
+  	<script src="js/main.js"></script>
     <link rel='stylesheet' href='/css/style.css' />
   </head>
-  <body>
-    <h1><%= title %></h1>
-  </body>
+
+<body data-ng-app="relacja">
+  <div data-ng-controller="relacjaCtrlr">
+
+      <div data-ng-repeat="msg in msgs track by $index">{{msg}}</div>
+
+    <form action="" data-ng-submit="sendMsg()">
+      <input type="text" data-ng-model="msg.text" maxlength="50">
+    </form>
+    
+  </div>
+</body>
 </html>

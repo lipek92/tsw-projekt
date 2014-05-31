@@ -1,0 +1,14 @@
+{
+  "name": "Relacja_live",
+  "author": "Michał Lipowski",
+  "version": "0.0.1",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "1.2.x"
+  }
+}
