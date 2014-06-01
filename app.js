@@ -70,6 +70,7 @@ passport.use(new LocalStrategy(
 
 io.sockets.on('connection', function (socket) {
     socket.on('send msg', function (data) {
+        console.log(data);
         history.unshift(data);
         io.sockets.emit('rec msg', data);
     });

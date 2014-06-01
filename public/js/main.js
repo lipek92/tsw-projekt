@@ -21,8 +21,19 @@ app.controller('relacjaCtrlr', ['$scope', 'socket',
         $scope.msgs = [];
         $scope.connected = false;
         $scope.sendMsg = function () {
+
             if ($scope.msg && $scope.msg.text) {
-                socket.emit('send msg', safe_tags_replace($scope.msg.text));
+           //     socket.emit('send min', safe_tags_replace($scope.min.text));
+
+           //     socket.emit('send msg', safe_tags_replace($scope.msg.text));
+
+                var mssg = {
+                image: $scope.option.text,
+                min: $scope.min.text,
+                msg: $scope.msg.text
+            };
+        socket.emit('send msg',mssg);
+
                 $scope.msg.text = '';
             }
         };

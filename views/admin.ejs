@@ -11,12 +11,22 @@
 <body data-ng-app="relacja">
   <div data-ng-controller="relacjaCtrlr">
 
-      <div data-ng-repeat="msg in msgs track by $index">{{msg}}</div>
+      
 
     <form action="" data-ng-submit="sendMsg()">
-      <input type="text" data-ng-model="msg.text">
+      <select id="option" data-ng-model="option.text">
+        <option value="none" selected>Normalne</option>
+        <option value="red">Czerwona kartka</option>
+        <option value="yellow">Żółta kartka</option>
+        <option value="gol">Gol</option>
+        <option value="change">Zmiana</option>
+      </select>
+      <input type="number" data-ng-model="min.text" placeholder="Czas" step="1" required>
+      <input type="text" data-ng-model="msg.text" placeholder="Komentarz" required>
+      <input type="submit">
     </form>
-
+<br />
+<div data-ng-repeat="msg in msgs track by $index">{{msg}}</div>
 
 
   </div>

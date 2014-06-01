@@ -71,3 +71,33 @@ body
 	margin-top: 30px;
 	text-align: center;
 }
+
+.icon
+{
+	        float:left;/*fix for  buggy browsers*/
+
+        width:60px;
+}
+
+.icon img
+{
+	width: 50px;
+	height: 65px;
+}
+
+.min
+{
+	font-size: 16px;
+	font-weight: bold;
+	        float:left;/*fix for  buggy browsers*/
+
+        width:60px;
+}
+.comment
+{
+
+	        float:left;/*fix for  buggy browsers*/
+
+        width: 85%;
+
+}
