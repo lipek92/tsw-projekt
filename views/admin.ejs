@@ -2,33 +2,85 @@
 <html>
   <head>
     <title>Administracja - Relacja live</title>
+    <script src="jquery/dist/jquery.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
   	<script src="angular/angular.min.js"></script>
   	<script src="js/main.js"></script>
-    <link rel='stylesheet' href='/css/style.css' />
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+    <link rel='stylesheet' href='/css/admin.css' />
+<!--     <link rel='stylesheet' href='/css/style.css' /> -->
   </head>
 
 <body data-ng-app="relacja">
+
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Relacja LIVE</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Strona główna</a></li>
+            <li><a href="/kontakt">Kontakt</a></li>
+            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">Wyloguj</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+<div class="container">
+  <div class="jumbotron">
+
+<!--     <button id="newRelation" type="button">Rozpocznij nową relację!</button>
+    <button id="endRelation" type="button">Zakończ bieżącą relację.</button> -->
+
+  <div data-ng-controller="teamsCtrlr">
+    <form action="" data-ng-submit="saveClubs()">
+      <input id="firstClubInput" type="text" placeholder="Gospodarze" data-ng-model="firstClub" class="form-control" required>
+      <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" data-ng-model="secondClub" required>
+      <input id="saveClubs" type="submit" value="Zapisz drużyny" class="btn btn-lg btn-danger btn-block">
+    </form>
+  </div>
+
   <div data-ng-controller="relacjaCtrlr">
-
-      
-
     <form action="" data-ng-submit="sendMsg()">
-      <select id="option" data-ng-model="option.text">
+      <select id="option" data-ng-model="option.text" class="form-control" placeholder="test" >
+        <option style="display:none" value="none">select a type</option>
         <option value="none" selected>Normalne</option>
         <option value="red">Czerwona kartka</option>
         <option value="yellow">Żółta kartka</option>
         <option value="gol">Gol</option>
         <option value="change">Zmiana</option>
+        <option value="contusion">Kontuzja</option>
+        <option value="corner">Rzut rożny</option>
+        <option value="penalty">Rzut karny</option>
+        <option value="timer">Rozpoczęcie, zakończenie</option>
+
       </select>
-      <input type="number" data-ng-model="min.text" placeholder="Czas" step="1" required>
-      <input type="text" data-ng-model="msg.text" placeholder="Komentarz" required>
-      <input type="submit">
+      <input type="number" data-ng-model="min.text" placeholder="Czas" step="1" min="0" max="99" class="form-control" >
+      <input type="text" data-ng-model="msg.text" placeholder="Komentarz" class="form-control" required>
+      <input id="sendMsg" type="submit" value="Dodaj komentarz" class="btn btn-lg btn-primary btn-block">
     </form>
-<br />
-<div data-ng-repeat="msg in msgs track by $index">{{msg}}</div>
+
+    <div class="console">
+      <h4>Konsola</h4>
+      <div data-ng-repeat="msg in msgs track by $index" class="consoleMessage">{{msg.min}} min. - {{msg.msg}}</div><br />
+    </div>
 
 
   </div>
+</div>
+</div>
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 body
 {
 	padding-top: 70px;
+	background: #397e00 url('/images/background_pitch.jpg') repeat-x;
 }
 
 .all
@@ -18,8 +19,9 @@ body
 
 .teams
 {
-	font-size: 45px;
+	font-size: 40px;
 	margin: 20px 0px;
+	color: #efefef;
 
 }
 
@@ -44,8 +46,8 @@ body
 
 #score
 {
-	color: red;
-	font-size: 45px;
+	color: #6e1810;
+	font-size: 40px;
 
 	text-align: center;
 
@@ -61,8 +63,10 @@ body
 	color: #414141;
 	line-height: 16px;
 	border-top: 1px solid #dbdbdb;
-	padding: 6px 0;
+	padding: 15px;
 	float: left;
+	background: #ffffff;
+
 }
 
 .login
@@ -81,23 +85,45 @@ body
 
 .icon img
 {
-	width: 50px;
-	height: 65px;
+	width: 38px;
+	height: 40px;
 }
 
 .min
 {
 	font-size: 16px;
 	font-weight: bold;
-	        float:left;/*fix for  buggy browsers*/
+	        float:left;
 
-        width:60px;
+        width:80px;
 }
 .comment
 {
 
-	        float:left;/*fix for  buggy browsers*/
-
+	    float:left;
         width: 85%;
 
+}
+
+.withoutMin
+{
+	display: none;
+}
+
+.jumbotron
+{
+	background: #408d00;
+	border: 5px solid #efefef;
+}
+
+.navbar
+{
+	background: white;
+}
+
+.form-signin-heading
+{
+	text-align: center;
+	color: white;
+	letter-spacing: 1mm;
 }

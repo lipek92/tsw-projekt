@@ -2,14 +2,14 @@
 <html>
 <head>
 	<title><%= title %></title>
-	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="jquery/dist/jquery.min.js"></script>
 	<script src="socket.io/socket.io.js"></script>
   <script src="angular/angular.min.js"></script>
   <script src="js/main.js"></script>
-  <script src="jquery/dist/jquery.min.js"></script>
 </head>
-<body>
+<body data-ng-app="relacja">
 	    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -23,7 +23,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/">Strona główna</a></li>
+            <li class="active"><a href="/">Strona główna</a></li>
             <li><a href="/kontakt">Kontakt</a></li>
             
           </ul>
@@ -35,38 +35,39 @@
     </div>
 
 
-        <div class="container">
+    <div class="container">
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">        
-        	<div class="teams">
+        	<div class="teams" data-ng-controller="teamsCtrlr">
+
 				<div class="team" id="firstClub">
-					Real Madryt
+					firstClub
 				</div>
 
 				<div class="team" id="secondClub">
-					FC Barcelona
+					secondClub
 				</div>
+      </div>
+
 				<div id="score">
-					1:0
+					score
 				</div>
 			</div>
 
-      </div>
-
     </div>
+
+
 	<div class="container">
-		<div data-ng-app="relacja">
   			<div data-ng-controller="relacjaCtrlr">
 			    <div class="relation">
       				<div data-ng-repeat="msg in msgs track by $index" class="message">
-                <div class="icon"><img src = "images/{{msg.image}}.png" /></div>
-                <div class="min">{{msg.min}}</div>
+                <div class="icon {{msg.image}}"><img src = "images/{{msg.image}}.png" /></div>
+                <div class="min {{msg.min}}" >{{msg.min}} min.</div>
                 <div class="comment">{{msg.msg}}</div>
               </div>
     			</div>
-			</div>
-		</div>
+		  </div>
 	</div>
 
 

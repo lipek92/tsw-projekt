@@ -18,6 +18,7 @@ var io = require('socket.io').listen(server);
 
 var history = [];
 
+
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
@@ -27,7 +28,9 @@ app.configure(function () {
     app.use(express.methodOverride());
 
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.favicon("public/images/favicon.png")); 
     app.use(express.static("bower_components"));
+
 
     app.use(express.cookieParser());
     app.use(express.urlencoded());
@@ -57,7 +60,6 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new LocalStrategy(
     function (username, password, done) {
         if ((username === 'admin') && (password === '1')) {
-            console.log("Zalogowanie jako "+username);
             return done(null, {
                 username: username,
                 password: password
@@ -70,11 +72,15 @@ passport.use(new LocalStrategy(
 
 io.sockets.on('connection', function (socket) {
     socket.on('send msg', function (data) {
-        console.log(data);
         history.unshift(data);
         io.sockets.emit('rec msg', data);
     });
     socket.emit('history', history);
+
+    socket.on('send clubs', function (data) {
+        
+        io.sockets.emit('rec clubs', data);
+    });
 });
 
 
@@ -111,6 +117,7 @@ app.get('/admin', function(req, res) {
 
 });
 
-// httpServer.listen(3000, function () {
-//     console.log('Serwer HTTP działa na pocie 3000');
-// });
+app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/login');
+});
