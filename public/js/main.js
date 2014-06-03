@@ -4,9 +4,8 @@ var socket = io.connect('http://' + location.host);
 
 $(document).ready(function (){
 
-	$("#sendMsg").click(function() {
+	$("#messageForm").submit(function() {
 
-		//dopisac ifa
 		var option = $("#option").find(":selected").val();
 		var time = $("#time").val();
 		var comment = $("#comment").val();
@@ -31,12 +30,9 @@ $(document).ready(function (){
             socket.emit('send score', goalTeam);
         }
 
-        $("comment").text = '';
-        $("#option").text = 'none';
-   //     $("#goalTeam").hide();
 	});
 
-    $("#saveClubs").click(function() {
+    $("#clubsForm").submit(function() {
         var firstClub = $("#firstClubInput").val();
         var secondClub = $("#secondClubInput").val();
         var data = {
@@ -117,8 +113,20 @@ $(document).ready(function (){
         if (data.fc !== "" && data.sc !== "")
         {
             $('#score').html(data.fcScore + " : " + data.scScore);
+
+            $("#firstClubInput").val(data.fc);
+            $("#secondClubInput").val(data.sc);;
+
+            $("#option").removeAttr("disabled");
+            $("#time").removeAttr("disabled");
+            $("#comment").removeAttr("disabled");
+            $("#messageSubmit").removeAttr("disabled");
         } else {
             $('#score').html("Brak relacji!");
+
+            $("#firstClubInput").removeAttr("disabled");
+            $("#secondClubInput").removeAttr("disabled");;
+            $("#clubsSubmit").removeAttr("disabled");
         } 
         
 

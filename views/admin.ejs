@@ -45,16 +45,16 @@
     <button id="endRelation" type="button">Zakończ bieżącą relację.</button> -->
 
   <div>
-    <form action="">
-      <input id="firstClubInput" type="text" placeholder="Gospodarze" class="form-control" required>
-      <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" required>
-      <input id="saveClubs" type="submit" value="Zapisz drużyny" class="btn btn-lg btn-danger btn-block">
+    <form id="clubsForm" action="">
+      <input id="firstClubInput" type="text" placeholder="Gospodarze" class="form-control" required disabled>
+      <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" required disabled>
+      <input id="clubsSubmit" type="submit" value="Zapisz drużyny" class="btn btn-lg btn-danger btn-block" disabled>
     </form>
   </div>
 
   <div>
-    <form action="">
-      <select id="option" class="form-control" >
+    <form id="messageForm" action="">
+      <select id="option" class="form-control" disabled>
         <option value="none" selected>Normalne</option>
         <option value="red">Czerwona kartka</option>
         <option value="yellow">Żółta kartka</option>
@@ -71,9 +71,9 @@
         <option value="secondTeam">Dla gości</option>
       </select>
 
-      <input id="time" type="number" placeholder="Czas" step="1" min="0" max="99" class="form-control" >
-      <input id="comment" type="text" placeholder="Komentarz" class="form-control" required>
-      <input id="sendMsg" type="submit" value="Dodaj komentarz" class="btn btn-lg btn-primary btn-block">
+      <input id="time" type="number" placeholder="Czas" step="1" min="0" max="99" class="form-control" disabled>
+      <input id="comment" type="text" placeholder="Komentarz" class="form-control" required disabled>
+      <input id="messageSubmit" type="submit" value="Dodaj komentarz" class="btn btn-lg btn-primary btn-block" disabled>
     </form>
 
 <!--     <div class="console">
