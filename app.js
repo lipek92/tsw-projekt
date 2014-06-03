@@ -92,6 +92,19 @@ io.sockets.on('connection', function (socket) {
         clubs.sc = data.sc;
         io.sockets.emit('rec clubs', data);
     });
+
+
+    socket.on('send score', function (data) {
+        console.log(data);
+        if (data === "firstTeam")
+        {
+            clubs.fcScore++;
+        } else {
+            clubs.scScore++;
+        }
+        io.sockets.emit('rec score', clubs);
+    });
+
 });
 
 

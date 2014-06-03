@@ -8,14 +8,9 @@ $(document).ready(function (){
 
 		//dopisac ifa
 		var option = $("#option").find(":selected").val();
-	//	var goalteam = $("#goalTeam").find(":selected").text();
 		var time = $("#time").val();
 		var comment = $("#comment").val();
-
-		// if($scope.min === undefined || $scope.min.text === null  || $scope.option === undefined) {
-		// 	option = "withoutMin";
-		// 	min = "withoutMin";
-		// }
+        var goalTeam = $("#goalTeam").find(":selected").val();
 
         if (time === "")
         {
@@ -26,11 +21,15 @@ $(document).ready(function (){
 		var data = {
 			image: option,
 			min: time,
-			msg: comment
-		//	goalTeam: goalteam
+			msg: comment,
 		};
 
 		socket.emit('send msg', data);
+
+        if (option === "gol")
+        {
+            socket.emit('send score', goalTeam);
+        }
 
         $("comment").text = '';
         $("#option").text = 'none';
@@ -57,8 +56,21 @@ $(document).ready(function (){
         socket.emit('send msg', msg);
     });
 
-    socket.on("recScore", function(data) {
-    	$("#score > p").text(data.team1 + " : " + data.team2);
+    $("#option").change(function() {
+        var value = $("#option").val();
+
+        if (value === "gol")
+        {
+            $("#goalTeam").show();
+        }
+        else
+        {
+            $("#goalTeam").hide();
+        }
+    });
+
+    socket.on("rec score", function(data) {
+    	$('#score').html(data.fcScore + " : " + data.scScore)
     });
 
     socket.on("rec msg", function(data) {
