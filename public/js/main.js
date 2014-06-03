@@ -42,9 +42,19 @@ $(document).ready(function (){
         var secondClub = $("#secondClubInput").val();
         var data = {
             fc: firstClub,
-            sc: secondClub
+            sc: secondClub,
+            fcScore: "0",
+            scScore: "0"
         };
-        socket.emit("clubNames", data);
+        var msg = {
+            image: "withoutMin",
+            min: "withoutMin",
+            msg: "Za chwilę rozpocznie się relacja z meczu "
+            +firstClub+ " - " +secondClub+"!"
+        };
+
+        socket.emit("send clubs", data);
+        socket.emit('send msg', msg);
     });
 
     socket.on("recScore", function(data) {
@@ -62,14 +72,14 @@ $(document).ready(function (){
     	// $(divComment).addClass("comment").text(data.msg);
     	// $(divParent).append(divIcon).append(divMin).append(divComment);
     	// $("#relation").append(divParent);
-            var text = "";
-            text += '<div class="message">'
-            text += '<div class="icon '+data.image+'"><img src = "images/'+data.image+'.png" /></div>'
-            text += '<div class="min '+data.min+'" >'+data.min+' min.</div>'
-            text += '<div class="comment">'+data.msg+'</div>'
-            text += '</div>';
+        var text = "";
+        text += '<div class="message">'
+        text += '<div class="icon '+data.image+'"><img src = "images/'+data.image+'.png" /></div>'
+        text += '<div class="min '+data.min+'" >'+data.min+' min.</div>'
+        text += '<div class="comment">'+data.msg+'</div>'
+        text += '</div>';
 
-            $('#relation').prepend(text);
+        $('#relation').prepend(text);
 
     });
 
@@ -86,4 +96,20 @@ $(document).ready(function (){
         $('#relation').html(text);
 
     });
+
+    socket.on('rec clubs', function (data) {
+        
+        $('#firstClub').html(data.fc);
+        $('#secondClub').html(data.sc);
+
+        if (data.fc !== "" && data.sc !== "")
+        {
+            $('#score').html(data.fcScore + " : " + data.scScore);
+        } else {
+            $('#score').html("Brak relacji!");
+        } 
+        
+
+    });
+
 });

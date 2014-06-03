@@ -17,6 +17,12 @@ var server = app.listen(3000);
 var io = require('socket.io').listen(server);
 
 var history = [];
+var clubs = {
+        fc: "",
+        sc: "",
+        fcScore: "0",
+        scScore: "0"
+    };
 
 
 app.configure(function () {
@@ -70,7 +76,11 @@ passport.use(new LocalStrategy(
 ));
 
 io.sockets.on('connection', function (socket) {
+
+
+    socket.emit('rec clubs', clubs);
     socket.emit('history', history);
+
     socket.on('send msg', function (data) {
         history.unshift(data);
         io.sockets.emit('rec msg', data);
@@ -78,7 +88,8 @@ io.sockets.on('connection', function (socket) {
     
 
     socket.on('send clubs', function (data) {
-        
+        clubs.fc = data.fc;
+        clubs.sc = data.sc;
         io.sockets.emit('rec clubs', data);
     });
 });
