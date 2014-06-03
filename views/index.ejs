@@ -6,11 +6,11 @@
   <link rel="stylesheet" href="css/style.css" />
   <script src="jquery/dist/jquery.min.js"></script>
 	<script src="socket.io/socket.io.js"></script>
-  <script src="angular/angular.min.js"></script>
+
   <script src="js/main.js"></script>
 </head>
-<body data-ng-app="relacja">
-	    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<body>
+	 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,40 +36,29 @@
 
 
     <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">        
-        	<div class="teams" data-ng-controller="teamsCtrlr">
+        <div class="teams">
 
-				<div class="team" id="firstClub">
-					firstClub
-				</div>
+				  <div class="team" id="firstClub">
+					 firstClub
+				  </div>
 
-				<div class="team" id="secondClub">
-					secondClub
-				</div>
-      </div>
+				  <div class="team" id="secondClub">
+					 secondClub
+				  </div>
 
+        </div>
 				<div id="score">
 					score
 				</div>
 			</div>
-
     </div>
 
+    <div class="container">
+		  <div id="relation" class="relation">
 
-	<div class="container">
-  			<div data-ng-controller="relacjaCtrlr">
-			    <div class="relation">
-      				<div data-ng-repeat="msg in msgs track by $index" class="message">
-                <div class="icon {{msg.image}}"><img src = "images/{{msg.image}}.png" /></div>
-                <div class="min {{msg.min}}" >{{msg.min}} min.</div>
-                <div class="comment">{{msg.msg}}</div>
-              </div>
-    			</div>
-		  </div>
-	</div>
-
+    	</div>
+    </div>
 
 </body>
 </html>

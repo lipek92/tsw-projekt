@@ -23,12 +23,11 @@ app.configure(function () {
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
-    app.use(express.favicon());
+    app.use(express.favicon("public/images/favicon.png")); 
     app.use(express.urlencoded());
-    app.use(express.methodOverride());
+ //   app.use(express.methodOverride());
 
     app.use(express.static(path.join(__dirname, 'public')));
-    app.use(express.favicon("public/images/favicon.png")); 
     app.use(express.static("bower_components"));
 
 
@@ -71,11 +70,12 @@ passport.use(new LocalStrategy(
 ));
 
 io.sockets.on('connection', function (socket) {
+    socket.emit('history', history);
     socket.on('send msg', function (data) {
         history.unshift(data);
         io.sockets.emit('rec msg', data);
     });
-    socket.emit('history', history);
+    
 
     socket.on('send clubs', function (data) {
         

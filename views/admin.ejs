@@ -4,14 +4,14 @@
     <title>Administracja - Relacja live</title>
     <script src="jquery/dist/jquery.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
-  	<script src="angular/angular.min.js"></script>
+
   	<script src="js/main.js"></script>
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
     <link rel='stylesheet' href='/css/admin.css' />
 <!--     <link rel='stylesheet' href='/css/style.css' /> -->
   </head>
 
-<body data-ng-app="relacja">
+<body>
 
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -44,18 +44,17 @@
 <!--     <button id="newRelation" type="button">Rozpocznij nową relację!</button>
     <button id="endRelation" type="button">Zakończ bieżącą relację.</button> -->
 
-  <div data-ng-controller="teamsCtrlr">
-    <form action="" data-ng-submit="saveClubs()">
-      <input id="firstClubInput" type="text" placeholder="Gospodarze" data-ng-model="firstClub" class="form-control" required>
-      <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" data-ng-model="secondClub" required>
+  <div>
+    <form action="">
+      <input id="firstClubInput" type="text" placeholder="Gospodarze" class="form-control" required>
+      <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" required>
       <input id="saveClubs" type="submit" value="Zapisz drużyny" class="btn btn-lg btn-danger btn-block">
     </form>
   </div>
 
-  <div data-ng-controller="relacjaCtrlr">
-    <form action="" data-ng-submit="sendMsg()">
-      <select id="option" data-ng-model="option.text" class="form-control" placeholder="test" >
-        <option style="display:none" value="none">select a type</option>
+  <div>
+    <form action="">
+      <select id="option" class="form-control" >
         <option value="none" selected>Normalne</option>
         <option value="red">Czerwona kartka</option>
         <option value="yellow">Żółta kartka</option>
@@ -65,17 +64,22 @@
         <option value="corner">Rzut rożny</option>
         <option value="penalty">Rzut karny</option>
         <option value="timer">Rozpoczęcie, zakończenie</option>
-
       </select>
-      <input type="number" data-ng-model="min.text" placeholder="Czas" step="1" min="0" max="99" class="form-control" >
-      <input type="text" data-ng-model="msg.text" placeholder="Komentarz" class="form-control" required>
+
+      <select id="goalTeam" class="form-control" style="display:none;">
+        <option>Gospodarze</option>
+        <option>Goście</option>
+      </select>
+
+      <input id="time" type="number" placeholder="Czas" step="1" min="0" max="99" class="form-control" >
+      <input id="comment" type="text" placeholder="Komentarz" class="form-control" required>
       <input id="sendMsg" type="submit" value="Dodaj komentarz" class="btn btn-lg btn-primary btn-block">
     </form>
 
-    <div class="console">
+<!--     <div class="console">
       <h4>Konsola</h4>
-      <div data-ng-repeat="msg in msgs track by $index" class="consoleMessage">{{msg.min}} min. - {{msg.msg}}</div><br />
-    </div>
+      
+    </div> -->
 
 
   </div>

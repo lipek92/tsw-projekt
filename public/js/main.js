@@ -1,106 +1,89 @@
-var app = angular.module('relacja', []);
+"use strict";
 
-app.factory('socket', function () {
-    var socket = io.connect('http://' + location.host);
-    return socket;
-});
+var socket = io.connect('http://' + location.host);
 
+$(document).ready(function (){
 
-app.controller('relacjaCtrlr', ['$scope', 'socket',
-    function ($scope, socket) {
+	$("#sendMsg").click(function() {
 
-        $scope.msgs = [];
-        $scope.connected = false;
-        $scope.sendMsg = function () {
-            if ($scope.msg && $scope.msg.text) {
-                if($scope.min === undefined || $scope.min.text === null  || $scope.option === undefined)
-                {
-                    var mssg = {
-                        image: "withoutMin",
-                        min: "withoutMin",
-                        msg: $scope.msg.text
-                    };
-                } else {
-                    var mssg = {
-                        image: $scope.option.text,
-                        min: $scope.min.text,
-                        msg: $scope.msg.text
-                    };
-                }
+		//dopisac ifa
+		var option = $("#option").find(":selected").val();
+	//	var goalteam = $("#goalTeam").find(":selected").text();
+		var time = $("#time").val();
+		var comment = $("#comment").val();
 
-        socket.emit('send msg',mssg);
+		// if($scope.min === undefined || $scope.min.text === null  || $scope.option === undefined) {
+		// 	option = "withoutMin";
+		// 	min = "withoutMin";
+		// }
 
-                $scope.msg.text = '';
-                $scope.option.text = 'none';
-            }
+        if (time === "")
+        {
+            time = "withoutMin";
+            option = "withoutMin";
+        }
+
+		var data = {
+			image: option,
+			min: time,
+			msg: comment
+		//	goalTeam: goalteam
+		};
+
+		socket.emit('send msg', data);
+
+        $("comment").text = '';
+        $("#option").text = 'none';
+   //     $("#goalTeam").hide();
+	});
+
+    $("#saveClubs").click(function() {
+        var firstClub = $("#firstClubInput").val();
+        var secondClub = $("#secondClubInput").val();
+        var data = {
+            fc: firstClub,
+            sc: secondClub
         };
-
-
-        ////////////////////////////////////////////////////////
-
-        $( document ).ready(function()
-        {   
-            $('#endRelation').click(function(event)
-            {
-                var mssg = {
-                    image: "withoutMin",
-                    min: "withoutMin",
-                    msg: "Relacja została zakończona!"
-                    };
-
-                    socket.emit('send msg',mssg);
-
-            
-
-                 $('#endRelation').prop('disabled', 'disabled');
-                 $('#sendMsg').prop('disabled', 'disabled');
-                 $('#newRelation').prop('disabled', false);
-                    
+        socket.emit("clubNames", data);
     });
 
+    socket.on("recScore", function(data) {
+    	$("#score > p").text(data.team1 + " : " + data.team2);
+    });
+
+    socket.on("rec msg", function(data) {
+    	// console.log(data);
+    	// var divParent = document.createElement("div");
+    	// var divIcon = document.createElement("div");
+    	// $(divIcon).addClass("icon").attr("src", "images/"+data.image+".png");
+    	// var divMin = document.createElement("div");
+    	// $(divMin).addClass("min").text(data.min + " min.");
+    	// var divComment = document.createElement("div");
+    	// $(divComment).addClass("comment").text(data.msg);
+    	// $(divParent).append(divIcon).append(divMin).append(divComment);
+    	// $("#relation").append(divParent);
+            var text = "";
+            text += '<div class="message">'
+            text += '<div class="icon '+data.image+'"><img src = "images/'+data.image+'.png" /></div>'
+            text += '<div class="min '+data.min+'" >'+data.min+' min.</div>'
+            text += '<div class="comment">'+data.msg+'</div>'
+            text += '</div>';
+
+            $('#relation').prepend(text);
+
+    });
+
+    socket.on('history', function (data) {
+        var text = "";
+        $.each(data,function(i,el){
+
+            text += '<div class="message">'
+            text += '<div class="icon '+el.image+'"><img src = "images/'+el.image+'.png" /></div>'
+            text += '<div class="min '+el.min+'">'+el.min+' min.</div>'
+            text += '<div class="comment">'+el.msg+'</div>'
+            text += '</div>';
+        });
+        $('#relation').html(text);
+
+    });
 });
-
-
-
-
-
-
-        socket.on('connect', function () {
-            $scope.connected = true;
-            $scope.$digest();
-        });
-        socket.on('history', function (data) {
-            $scope.msgs = data;
-            $scope.$digest();
-        });
-        socket.on('rec msg', function (data) {
-            $scope.msgs.unshift(data);
-            $scope.$digest();
-        });
-    }
-]);
-
-
-app.controller('teamsCtrlr', ['$scope', 'socket',
-    function ($scope, socket) {
-
-
-            $scope.saveClubs = function () {
-            var clubs = {
-                firstClub: $scope.firstClub.text,
-                secondClub: $scope.secondClub.text
-            };
-            socket.emit('send clubs', clubs);
-            
-        };
-
-
-        socket.on('rec clubs', function (data) {
-            $scope.$digest();
-        });
-
-
-
-
-}
-]);
