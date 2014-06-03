@@ -72,6 +72,8 @@ $(document).ready(function (){
 
     socket.on("rec score", function(data) {
     	$('#score').html(data.fcScore + " : " + data.scScore)
+        document.title = (data.fc + " " + data.fcScore + " : " + data.scScore + " " + data.sc);
+
     });
 
     socket.on("rec msg", function(data) {
@@ -93,6 +95,14 @@ $(document).ready(function (){
         text += '</div>';
 
         $('#relation').prepend(text);
+
+        if (data.image === "penalty")
+        {
+            $("<embed src='sounds/whistle.mp3' hidden='true' autostart='true' loop='false' class='playSound'>" + "<audio autoplay='autoplay' style='display:none;' controls='controls'><source src='sounds/whistle.mp3' /></audio>").appendTo('body');
+        } else if (data.image === "gol"){
+            $("<embed src='sounds/goal.mp3' hidden='true' autostart='true' loop='false' class='playSound'>" + "<audio autoplay='autoplay' style='display:none;' controls='controls'><source src='sounds/goal.mp3' /></audio>").appendTo('body');
+
+        }
 
     });
 

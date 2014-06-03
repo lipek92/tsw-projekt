@@ -23,35 +23,24 @@ body
 
 .team
 {
-	width: 30%;
+
 	text-align: center;
-		vertical-align: middle;
+	vertical-align: middle;
+	margin: 15px;
+
+	display: inline-table;
 }
 
-
-#firstClub
-{
-display: inline-table;
-
-}
-
-#secondClub
-{
-display: inline-table;
-
-}
 
 #score
 {
-	color: #6e1810;
+	color: #408d00;
 	font-size: 60px;
 	display: inline-table;
 	text-align: center;
 	vertical-align: middle;
-	padding: 15px;
-
-
-
+	background: white;
+	min-width: 200px;
 }
 
 .message
@@ -125,4 +114,13 @@ display: inline-table;
 	text-align: center;
 	color: white;
 	letter-spacing: 1mm;
+}
+
+
+@media screen and (max-width: 1024px) {
+	.teams, #score
+	{
+		display: block;
+		min-width: 0px;
+	}
 }
