@@ -1,3 +1,6 @@
+
+/*jshint globalstrict: true, devel: true, browser: true, jquery: true */
+/* global io */
 "use strict";
 
 var socket = io.connect('http://' + location.host);
@@ -44,8 +47,7 @@ $(document).ready(function (){
         var msg = {
             image: "withoutMin",
             min: "withoutMin",
-            msg: "Za chwilę rozpocznie się relacja z meczu "
-            +firstClub+ " - " +secondClub+"!"
+            msg: "Za chwilę rozpocznie się relacja z meczu "+firstClub+ " - " +secondClub+"!"
         };
 
         socket.emit("send clubs", data);
@@ -71,27 +73,18 @@ $(document).ready(function (){
     });
 
     socket.on("rec score", function(data) {
-    	$('#score').html(data.fcScore + " : " + data.scScore)
+        $('#score').html(data.fcScore + " : " + data.scScore);
         document.title = (data.fc + " " + data.fcScore + " : " + data.scScore + " " + data.sc);
 
     });
 
     socket.on("rec msg", function(data) {
-    	// console.log(data);
-    	// var divParent = document.createElement("div");
-    	// var divIcon = document.createElement("div");
-    	// $(divIcon).addClass("icon").attr("src", "images/"+data.image+".png");
-    	// var divMin = document.createElement("div");
-    	// $(divMin).addClass("min").text(data.min + " min.");
-    	// var divComment = document.createElement("div");
-    	// $(divComment).addClass("comment").text(data.msg);
-    	// $(divParent).append(divIcon).append(divMin).append(divComment);
-    	// $("#relation").append(divParent);
+
         var text = "";
-        text += '<div class="message">'
-        text += '<div class="icon '+data.image+'"><img src = "images/'+data.image+'.png" /></div>'
-        text += '<div class="min '+data.min+'" >'+data.min+' min.</div>'
-        text += '<div class="comment">'+data.msg+'</div>'
+        text += '<div class="message">';
+        text += '<div class="icon '+data.image+'"><img src = "images/'+data.image+'.png" /></div>';
+        text += '<div class="min '+data.min+'" >'+data.min+' min.</div>';
+        text += '<div class="comment">'+data.msg+'</div>';
         text += '</div>';
 
         $('#relation').prepend(text);
@@ -108,12 +101,12 @@ $(document).ready(function (){
 
     socket.on('history', function (data) {
         var text = "";
-        $.each(data,function(i,el){
-
-            text += '<div class="message">'
-            text += '<div class="icon '+el.image+'"><img src = "images/'+el.image+'.png" /></div>'
-            text += '<div class="min '+el.min+'">'+el.min+' min.</div>'
-            text += '<div class="comment">'+el.msg+'</div>'
+        $.each(data,function(){
+            var el = arguments[1];
+            text += '<div class="message">';
+            text += '<div class="icon '+el.image+'"><img src = "images/'+el.image+'.png" /></div>';
+            text += '<div class="min '+el.min+'">'+el.min+' min.</div>';
+            text += '<div class="comment">'+el.msg+'</div>';
             text += '</div>';
         });
         $('#relation').html(text);
@@ -130,7 +123,7 @@ $(document).ready(function (){
             $('#score').html(data.fcScore + " : " + data.scScore);
 
             $("#firstClubInput").val(data.fc);
-            $("#secondClubInput").val(data.sc);;
+            $("#secondClubInput").val(data.sc);
 
             $("#option").removeAttr("disabled");
             $("#time").removeAttr("disabled");
@@ -141,7 +134,7 @@ $(document).ready(function (){
             $('#score').html("Brak relacji!");
 
             $("#firstClubInput").removeAttr("disabled");
-            $("#secondClubInput").removeAttr("disabled");;
+            $("#secondClubInput").removeAttr("disabled");
             $("#clubsSubmit").removeAttr("disabled");
         } 
         

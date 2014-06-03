@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Administracja - Relacja live</title>
+    <meta charset="utf-8">
     <script src="jquery/dist/jquery.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
@@ -40,7 +41,7 @@
   <div class="jumbotron">
 
   <div>
-    <form id="clubsForm" action="">
+    <form id="clubsForm">
       <div class="input-group">
         <span class="input-group-addon">Gospodarze</span>
         <input id="firstClubInput" type="text" placeholder="Gospodarze" class="form-control" required disabled pattern="[A-Z].+">
@@ -56,7 +57,7 @@
   </div>
 
   <div>
-    <form id="messageForm" action="">
+    <form id="messageForm">
       <select id="option" class="form-control" disabled>
         <option value="none" selected>Normalne</option>
         <option value="red">Czerwona kartka</option>
@@ -75,7 +76,7 @@
       </select>
 
       <input id="time" type="number" placeholder="Czas" step="1" min="0" max="99" class="form-control" disabled>
-      <input id="comment" type="text" placeholder="Komentarz" class="form-control" required disabled pattern="[A-Z]+[a-z].+">
+      <input id="comment" type="text" placeholder="Komentarz" class="form-control" required disabled>
       <input id="messageSubmit" type="submit" value="Dodaj komentarz" class="btn btn-lg btn-success btn-block" disabled>
     </form>
 

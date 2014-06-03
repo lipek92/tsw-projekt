@@ -10,6 +10,7 @@
         "express": "3.x",
         "ejs": "*",
         "connect": "^2.14.5",
+        "less-middleware": "0.1.x",
         "socket.io": "^0.9.16",
         "passport": "^0.2.0",
         "passport-local": "^1.0.0",

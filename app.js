@@ -1,13 +1,16 @@
-var express = require('express');
-var http = require('http');
-var path = require('path');
+/*jshint globalstrict: true, devel: true, browser: true, jquery: true */
+/*global require, __dirname*/ 
+"use strict";
 
+var express = require('express');
+var path = require('path');
+var less = require('less-middleware');
 var app = express();
 var connect = require('connect');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var socketIo = require('socket.io');
-var passportSocketIo = require('passport.socketio');
+// var socketIo = require('socket.io');
+// var passportSocketIo = require('passport.socketio');
 var sessionStore = new connect.session.MemoryStore();
 
 var sessionSecret = 'sesyjnySekret';
@@ -16,7 +19,7 @@ var sessionKey = 'connect.sid';
 var server = app.listen(3000);
 var io = require('socket.io').listen(server);
 
-var history = [];
+var msgHistory = [];
 var clubs = {
         fc: "",
         sc: "",
@@ -26,13 +29,20 @@ var clubs = {
 
 
 app.configure(function () {
-    app.set('port', process.env.PORT || 3000);
+    // app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
     app.use(express.favicon("public/images/favicon.png")); 
     app.use(express.urlencoded());
  //   app.use(express.methodOverride());
 
+    app.use(less({
+        src: path.join(__dirname, 'less'),
+        dest: path.join(__dirname, 'public/css'),
+        prefix: '/css',
+        compress: true
+    }));
+    
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static("bower_components"));
 
@@ -64,7 +74,7 @@ passport.deserializeUser(function (obj, done) {
 
 passport.use(new LocalStrategy(
     function (username, password, done) {
-        if ((username === 'admin') && (password === '1')) {
+        if ((username === 'admin') && (password === 'admin')) {
             return done(null, {
                 username: username,
                 password: password
@@ -79,10 +89,10 @@ io.sockets.on('connection', function (socket) {
 
 
     socket.emit('rec clubs', clubs);
-    socket.emit('history', history);
+    socket.emit('history', msgHistory);
 
     socket.on('send msg', function (data) {
-        history.unshift(data);
+        msgHistory.unshift(data);
         io.sockets.emit('rec msg', data);
     });
     
@@ -103,15 +113,15 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('rec score', clubs);
     });
 
-    socket.on('end relation', function (data) {
+    socket.on('end relation', function () {
         clubs.fc = "";
         clubs.sc = "";
         clubs.fcScore = "0";
         clubs.scScore = "0";
-        history = [];
+        msgHistory.length = 0;
 
         socket.emit('rec clubs', clubs);
-        socket.emit('history', history);
+        socket.emit('history', msgHistory);
     });
 
 });
@@ -132,6 +142,7 @@ app.post('/login',
     }),
     function (req, res) {
         res.redirect('/admin');
+        console.log(req.user);
     }
 );
 
