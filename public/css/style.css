@@ -11,17 +11,13 @@ body
 	margin: 0 auto;
 }
 
-.teamNames
-{
-	color: blue;
-	text-align: center;
-}
-
 .teams
 {
 	font-size: 40px;
-	margin: 20px 0px;
+	padding: 15px;
 	color: #ffffff;
+	text-align: center;
+
 
 }
 
@@ -29,30 +25,33 @@ body
 {
 	width: 30%;
 	text-align: center;
+		vertical-align: middle;
 }
 
 
 #firstClub
 {
-	float: left;
+display: inline-table;
 
 }
 
 #secondClub
 {
-	float: right;
+display: inline-table;
 
 }
 
 #score
 {
 	color: #6e1810;
-	font-size: 40px;
-
+	font-size: 60px;
+	display: inline-table;
 	text-align: center;
+	vertical-align: middle;
+	padding: 15px;
 
 
-	position: relative;
+
 }
 
 .message

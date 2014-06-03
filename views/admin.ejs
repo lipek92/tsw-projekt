@@ -27,7 +27,6 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/">Strona główna</a></li>
-            <li><a href="/kontakt">Kontakt</a></li>
             
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -45,15 +44,15 @@
     <form id="clubsForm" action="">
       <div class="input-group">
         <span class="input-group-addon">Gospodarze</span>
-        <input id="firstClubInput" type="text" placeholder="Gospodarze" class="form-control" required disabled>
+        <input id="firstClubInput" type="text" placeholder="Gospodarze" class="form-control" required disabled pattern="[A-Z].+">
       </div>
 
       <div class="input-group">
         <span class="input-group-addon">Goście</span>
-        <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" required disabled>
+        <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" required disabled pattern="[A-Z].+">
       </div>
 
-      <input id="clubsSubmit" type="submit" value="Zapisz drużyny" class="btn btn-lg btn-danger btn-block" disabled>
+      <input id="clubsSubmit" type="submit" value="Zapisz drużyny" class="btn btn-lg btn-warning btn-block" disabled>
     </form>
   </div>
 
@@ -77,12 +76,12 @@
       </select>
 
       <input id="time" type="number" placeholder="Czas" step="1" min="0" max="99" class="form-control" disabled>
-      <input id="comment" type="text" placeholder="Komentarz" class="form-control" required disabled>
-      <input id="messageSubmit" type="submit" value="Dodaj komentarz" class="btn btn-lg btn-primary btn-block" disabled>
+      <input id="comment" type="text" placeholder="Komentarz" class="form-control" required disabled pattern="[A-Z]+[a-z].+">
+      <input id="messageSubmit" type="submit" value="Dodaj komentarz" class="btn btn-lg btn-success btn-block" disabled>
     </form>
 
 <form id="endForm">
-    <input id="endRelation" value="Zakończ relację" type="submit" class="btn btn-lg btn-warning btn-block" disabled>
+    <input id="endRelation" value="Zakończ relację" type="submit" class="btn btn-lg btn-danger btn-block" disabled>
 </form>
 <!--     <div class="console">
       <h4>Konsola</h4>

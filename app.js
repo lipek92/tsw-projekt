@@ -118,7 +118,12 @@ io.sockets.on('connection', function (socket) {
 
 
 app.get('/', function(req, res) {
-    res.render("index", {title: "Strona główna"});
+    if (req.user) {
+        res.render("index", {login: "Panel admina"});
+    } else
+    {
+        res.render("index", {login: "Zaloguj"});
+    }
 });
 
 app.post('/login',
@@ -152,5 +157,5 @@ app.get('/admin', function(req, res) {
 
 app.get('/logout', function (req, res) {
     req.logout();
-    res.redirect('/login');
+    res.redirect('/');
 });
