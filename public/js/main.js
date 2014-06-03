@@ -49,7 +49,7 @@ $(document).ready(function (){
         };
 
         socket.emit("send clubs", data);
-        socket.emit('send msg', msg);
+        socket.emit("send msg", msg);
     });
 
     $("#option").change(function() {
@@ -63,6 +63,11 @@ $(document).ready(function (){
         {
             $("#goalTeam").hide();
         }
+    });
+
+    $("#endForm").submit(function()
+    {
+        socket.emit("end relation");
     });
 
     socket.on("rec score", function(data) {
@@ -121,6 +126,7 @@ $(document).ready(function (){
             $("#time").removeAttr("disabled");
             $("#comment").removeAttr("disabled");
             $("#messageSubmit").removeAttr("disabled");
+            $("#endRelation").removeAttr("disabled");
         } else {
             $('#score').html("Brak relacji!");
 

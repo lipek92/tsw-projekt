@@ -86,13 +86,11 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('rec msg', data);
     });
     
-
     socket.on('send clubs', function (data) {
         clubs.fc = data.fc;
         clubs.sc = data.sc;
         io.sockets.emit('rec clubs', data);
     });
-
 
     socket.on('send score', function (data) {
         console.log(data);
@@ -103,6 +101,17 @@ io.sockets.on('connection', function (socket) {
             clubs.scScore++;
         }
         io.sockets.emit('rec score', clubs);
+    });
+
+    socket.on('end relation', function (data) {
+        clubs.fc = "";
+        clubs.sc = "";
+        clubs.fcScore = "0";
+        clubs.scScore = "0";
+        history = [];
+
+        socket.emit('rec clubs', clubs);
+        socket.emit('history', history);
     });
 
 });

@@ -41,13 +41,18 @@
 <div class="container">
   <div class="jumbotron">
 
-<!--     <button id="newRelation" type="button">Rozpocznij nową relację!</button>
-    <button id="endRelation" type="button">Zakończ bieżącą relację.</button> -->
-
   <div>
     <form id="clubsForm" action="">
-      <input id="firstClubInput" type="text" placeholder="Gospodarze" class="form-control" required disabled>
-      <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" required disabled>
+      <div class="input-group">
+        <span class="input-group-addon">Gospodarze</span>
+        <input id="firstClubInput" type="text" placeholder="Gospodarze" class="form-control" required disabled>
+      </div>
+
+      <div class="input-group">
+        <span class="input-group-addon">Goście</span>
+        <input id="secondClubInput" type="text" placeholder="Goście" class="form-control" required disabled>
+      </div>
+
       <input id="clubsSubmit" type="submit" value="Zapisz drużyny" class="btn btn-lg btn-danger btn-block" disabled>
     </form>
   </div>
@@ -76,6 +81,9 @@
       <input id="messageSubmit" type="submit" value="Dodaj komentarz" class="btn btn-lg btn-primary btn-block" disabled>
     </form>
 
+<form id="endForm">
+    <input id="endRelation" value="Zakończ relację" type="submit" class="btn btn-lg btn-warning btn-block" disabled>
+</form>
 <!--     <div class="console">
       <h4>Konsola</h4>
       
