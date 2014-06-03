@@ -74,7 +74,7 @@ $(document).ready(function (){
 
     socket.on("rec score", function(data) {
         $('#score').html(data.fcScore + " : " + data.scScore);
-        document.title = (data.fc + " " + data.fcScore + " : " + data.scScore + " " + data.sc);
+        document.title = (data.fc + " " + data.fcScore + ":" + data.scScore + " " + data.sc);
 
     });
 

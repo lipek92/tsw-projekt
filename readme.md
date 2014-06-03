@@ -6,3 +6,6 @@ Projekt przygotowany na potrzeby przedmiotu Technologie Sieci Web.
 		- npm install
 		- bower install
 		- npm start
+
+#DEMO 
+http://soccer-live.herokuapp.com/
