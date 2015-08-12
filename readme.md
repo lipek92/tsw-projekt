@@ -9,3 +9,6 @@ Projekt przygotowany na potrzeby przedmiotu Technologie Sieci Web.
 
 #DEMO 
 http://soccer-live.herokuapp.com/
+
+Login: admin
+Haslo: admin
